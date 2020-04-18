@@ -1,0 +1,66 @@
+# importing dependencies
+import numpy as np
+import pandas as pd
+from matplotlib import pyplot as plt
+%matplotlib inline
+
+# using pandas to read the database stored 
+data= pd.read_csv('Titanicdf_train.csv')
+type(data)
+
+data
+
+# veiwing column heads
+data.head()
+
+data.info()
+
+data.tail(10)
+
+data.shape
+
+col=data.columns
+col
+
+data.describe()
+
+data.Name
+
+data.iloc[:,3]
+
+data.plot(kind='box')
+plt.show()
+
+data.describe(include='all')
+
+data.Pclass.value_counts()
+
+data.Sex.value_counts()
+
+data.Sex.value_counts(normalize='True')
+
+data.Survived.value_counts()
+
+data.Pclass.value_counts().plot(kind='bar')
+
+data.groupby(['Sex']).Age.median()
+
+data.groupby(['Sex']).Age.mean()
+
+data.groupby(['Pclass']).Fare.median()
+
+data.groupby(['Pclass'])["Fare","Age"].mean()
+
+# crosstab
+pd.crosstab(data.Sex,data.Pclass)
+
+pd.crosstab(data.Sex,data.Pclass).plot(kind='bar')
+
+#pivot table
+data.pivot_table(index='Sex',columns='Pclass',values='Age',aggfunc='mean')
+
+data[data.Embarked.isnull()]
+
+pd.crosstab(data.Survived,data.Embarked)
+
+data.groupby(['Survived','Pclass','Embarked']).Fare.median()
